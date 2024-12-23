@@ -10,30 +10,30 @@ import time
 
 
 def check_root():
-    if os.geteuid() != 0:  # Проверяем, если текущий пользователь не root
+    if os.geteuid() != 0:
+
         print("Этот скрипт должен запускаться от имени root!")
-        sys.exit(1)  # Завершаем выполнение с ненулевым кодом ошибки
+        sys.exit(1)
+
 
 
 if __name__ == "main":
     check_root()
     print("Скрипт запущен от имени root.")
-    # Ваш основной код здесь
+
 
 
 def daemonize():
-    # Создаем форк процесса
     if os.fork() > 0:
         sys.exit()
-
-    # Отделяемся от родительского процесса
+а
     os.setsid()
 
-    # Создаем второй форк
+
     if os.fork() > 0:
         sys.exit()
 
-    # Перенаправляем стандартные потоки
+
     sys.stdout = open('/dev/null', 'w')
     sys.stderr = open('/dev/null', 'w')
     sys.stdin = open('/dev/null', 'r')
